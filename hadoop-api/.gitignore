@@ -23,3 +23,5 @@ target
 .idea/
 .groovy
 .json
+out
+/out/

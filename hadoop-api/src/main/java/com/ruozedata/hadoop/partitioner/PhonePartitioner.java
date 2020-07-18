@@ -1,6 +1,6 @@
 package com.ruozedata.hadoop.partitioner;
 
-import com.ruozedata.bigdata.mapreduce.ser.Access;
+import com.ruozedata.hadoop.serialize.Access;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
 

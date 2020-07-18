@@ -1,7 +1,7 @@
 package com.ruozedata.hadoop.outputformat;
 
-import com.ruozedata.bigdata.mapreduce.inputformat.DeptWritable;
-import com.ruozedata.bigdata.utils.FileUtils;
+import com.ruozedata.hadoop.inputformat.DeptWritable;
+import com.ruozedata.hadoop.study02.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;

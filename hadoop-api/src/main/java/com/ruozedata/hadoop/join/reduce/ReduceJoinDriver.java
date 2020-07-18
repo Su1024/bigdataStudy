@@ -1,9 +1,6 @@
 package com.ruozedata.hadoop.join.reduce;
 
-import com.ruozedata.bigdata.mapreduce.ser.Access;
-import com.ruozedata.bigdata.mapreduce.wc.WordCountMapper;
-import com.ruozedata.bigdata.mapreduce.wc.WordCountReducer;
-import com.ruozedata.bigdata.utils.FileUtils;
+import com.ruozedata.hadoop.study02.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;

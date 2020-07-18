@@ -1,7 +1,7 @@
 package com.ruozedata.hadoop.inputformat;
 
-import com.ruozedata.hadoop.study02.FileUtils;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -10,34 +10,45 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.db.DBConfiguration;
 import org.apache.hadoop.mapreduce.lib.db.DBInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
 import java.io.IOException;
 
 /**
- * @author PK哥
- **/
-public class MySQLDBInputFormatDriver {
+ * @ClassName MySQLDBToolDriver
+ * @Description
+ * @Author suguoming
+ * @Date 2020/7/14 9:29 下午
+ *
+ *
+ * export LIBJARS=/Users/sugm/dev/lib/mysql-connector-java-5.1.27.jar
+ * export HADOOP_CLASSPATH=/Users/sugm/dev/lib/mysql-connector-java-5.1.27.jar
+ * hadoop jar hadoop-api-1.0.0.jar com.ruozedata.hadoop.inputformat.MySQLDBToolDriver -libjars ${LIBJARS}
+ *
+ * 参考：http://grepalex.com/2013/02/25/hadoop-libjars/
+ */
+public class MySQLDBToolDriver extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
-        String output = "out";
-
-        // 1 获取Job
         Configuration configuration = new Configuration();
-
-
         DBConfiguration.configureDB(configuration,
                 "com.mysql.jdbc.Driver",
                 "jdbc:mysql://localhost:3306/ruozedata",
                 "root",
                 "root");
+        System.exit(ToolRunner.run(configuration, new MySQLDBToolDriver(), args));
+    }
 
-        Job job = Job.getInstance(configuration);
+    @Override
+    public int run(String[] args) throws Exception {
+        // 1 获取Job
+        Job job = Job.getInstance(super.getConf());
 
-
-        FileUtils.deleteOutput(configuration, output);
+        String output = "/out";
 
         // 2 设置主类
-        job.setJarByClass(MySQLDBInputFormatDriver.class);
+        job.setJarByClass(MySQLDBToolDriver.class);
 
         // 3 设置Mapper
         job.setMapperClass(MyMapper.class);
@@ -55,7 +66,7 @@ public class MySQLDBInputFormatDriver {
 
         // 7 提交Job
         boolean result = job.waitForCompletion(true);
-        System.exit(result ? 0 : 1);
+        return result ? 0 : 1;
     }
 
 
@@ -65,5 +76,4 @@ public class MySQLDBInputFormatDriver {
             context.write(NullWritable.get(), value);
         }
     }
-
 }

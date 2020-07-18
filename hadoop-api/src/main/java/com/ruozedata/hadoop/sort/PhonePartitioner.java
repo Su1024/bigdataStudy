@@ -1,6 +1,5 @@
 package com.ruozedata.hadoop.sort;
 
-import com.ruozedata.bigdata.mapreduce.ser.Access;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
 

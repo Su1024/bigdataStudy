@@ -1,7 +1,7 @@
 package com.ruozedata.hadoop.join.map;
 
-import com.ruozedata.bigdata.mapreduce.join.reduce.Info;
-import com.ruozedata.bigdata.utils.FileUtils;
+import com.ruozedata.hadoop.join.reduce.Info;
+import com.ruozedata.hadoop.study02.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
